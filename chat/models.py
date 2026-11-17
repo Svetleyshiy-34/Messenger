@@ -4,6 +4,7 @@ from django.db import models
 
 class Room(models.Model):
     name = models.CharField(max_length=100)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='rooms', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -12,7 +13,7 @@ class Room(models.Model):
 
 class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='messages')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='messages')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
