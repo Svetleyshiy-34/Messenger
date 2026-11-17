@@ -10,4 +10,4 @@ class RoomAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('room', 'user', 'created_at')
     list_filter = ('room',)
-    search_fields = ('text', 'user_username')
+    search_fields = ('text', 'user__username')
